@@ -2,7 +2,6 @@ version: '3'
 services:
     zoo1:
         image: zookeeper
-        hostname: zoo1
         volumes:
           - /home/zoo/data:/data        
         ports:
@@ -13,7 +12,7 @@ services:
             - bridge
         environment:
             ZOO_MY_ID: 1
-            ZOO_SERVERS: server.1=0.0.0.0:2818:3818 server.2=zoo2:2828:3828 server.3=zoo3:2838:3838
+            ZOO_SERVERS: server.1=0.0.0.0:2818:3818 server.2=192.168.3.101:2828:3828 server.3=192.168.3.103:2838:3838
         deploy:
          replicas: 1
          placement:
@@ -31,7 +30,7 @@ services:
             - bridge
         environment:
             ZOO_MY_ID: 2
-            ZOO_SERVERS: server.1=zoo1:2818:3818 server.2=0.0.0.0:2828:3828 server.3=zoo3:2838:3838
+            ZOO_SERVERS: server.1=192.168.3.101:2818:3818 server.2=0.0.0.0:2828:3828 server.3=192.168.3.103:2838:3838
         deploy:
          replicas: 1
          placement:
@@ -49,7 +48,7 @@ services:
             - bridge
         environment:
             ZOO_MY_ID: 3
-            ZOO_SERVERS: server.1=zoo1:2818:3818 server.2=zoo2:2828:3828 server.3=0.0.0.0:2838:3838
+            ZOO_SERVERS: server.1=192.168.3.101:2818:3818 server.2=192.168.3.102:2828:3828 server.3=0.0.0.0:2838:3838
         deploy:
          replicas: 1
          placement:
