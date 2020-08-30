@@ -6,12 +6,11 @@ services:
     volumes:
       - /home/zoo/data:/data
     ports:
-      - "2111:2181"
-      - "2818:2888"
-      - "3818:3888"
+      - "2181:2181"
+      - "7001:8080"
     environment:
       ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=0.0.0.0:2818:3818 server.2=zoo2:2828:3828 server.3=zoo3:2838:3838
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     deploy:
       replicas: 1
       placement:
@@ -22,30 +21,24 @@ services:
     volumes:
       - /home/zoo/data:/data
     ports:
-      - "2121:2181"
-      - "2828:2888"
-      - "3828:3888"
+      - "2182:2181"
     environment:
       ZOO_MY_ID: 2
-      ZOO_SERVERS: server.1=zoo1:2818:3818 server.2=0.0.0.0:2828:3828 server.3=zoo3:2838:3838
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=0.0.0.0:2888:3888 server.3=zoo3:2888:3888
     deploy:
       replicas: 1
       placement:
         constraints: [node.hostname == wiki2]
-    stdin_open: true
-    tty: true
   zoo3:
     image: zookeeper
     hostname: zoo3
     volumes:
       - /home/zoo/data:/data
     ports:
-      - "2131:2181"
-      - "2838:2888"
-      - "3838:3888"
+      - "2183:2181"
     environment:
       ZOO_MY_ID: 3
-      ZOO_SERVERS: server.1=zoo1:2818:3818 server.2=zoo2:2828:3828 server.3=0.0.0.0:2838:3838
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=0.0.0.0:2888:3888
     deploy:
       replicas: 1
       placement:
